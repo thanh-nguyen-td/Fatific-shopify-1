@@ -125,6 +125,8 @@
       "announcement-bar": {
         "type": "announcement-bar",
         "settings": {
+          "text": "This is a demo store. Content courtesy of SEH Kelly!",
+          "url": ""
         }
       },
       "header": {
