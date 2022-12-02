@@ -145,7 +145,7 @@
         "type": "header",
         "settings": {
           "color_scheme": "background-1",
-          "logo": "{{ shop.brand.logo }}",
+          "logo": "shopify:\/\/shop_images\/logo-windsor_800x182_de414ba6-1081-496f-856d-2bc89069baa1.webp",
           "logo_width": 90,
           "logo_position": "middle-left",
           "menu": "main-menu",
@@ -215,7 +215,10 @@
           "color_scheme": "background-1"
         }
       }
-    }
+    },
+    "content_for_index": [
+
+    ]
   },
   "presets": {
     "Default": {
