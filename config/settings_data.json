@@ -125,6 +125,7 @@
       "announcement-bar": {
         "type": "announcement-bar",
         "settings": {
+          "text": "Hello kitti"
         }
       },
       "header": {
