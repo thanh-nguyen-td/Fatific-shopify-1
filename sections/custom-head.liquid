@@ -1,0 +1,251 @@
+{{ 'custom-head.css' | asset_url | stylesheet_tag }}
+<nav class="head-wrap" id="head-wrap">
+   <div class="head-container ">
+    <div class="head-logo">
+        {%- if section.settings.logo != blank -%}
+           <img src="{{section.settings.logo | img_url: 'large' }}" width="auto" height="auto" loading="lazy" style="width:100%"/>
+            {%- else -%}
+            <a>{{ shop.name }}</a>  
+        {%- endif -%}
+    </div>
+        <input type="radio" name="slider" id="menu-btn">
+        <input type="radio" name="slider" id="close-btn" checked>
+        <div class="head-menu-container" style="background: orange;">
+            <ul class="head-menu">
+                <label for="close-btn"><i class="fa-solid fa-xmark"></i></label>
+                {% for link in section.settings.menu.links %}
+                    {% assign linkTitle = link.title | downcase %}
+                    {% assign type = "dropdown" %}
+                    {% for block in section.blocks %}
+                        {% if block.type == "mega_menu" %}
+                            {% assign blocksTitle = block.settings.title_mega_menu | downcase %}
+                            {% if blocksTitle == linkTitle and block.type ==  "mega_menu"%}
+                                {% assign type = block.type %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% case type %}
+                        {% when "dropdown" %}
+                            <li style="position: relative;">
+                                {% if link.title == "FEATURES" %}
+                                    {% render 'ticker', content: 'HOT!', color: '#CD0004' %}
+                                {% endif %}
+                                
+                                <a href="{{ link.url }}" class="head-menu__desktop-item">{{ link.title | upcase }}</a>
+                                <input type="checkbox" id="showMenuDrop{{ forloop.index }}" class="showMenuDrop"/>
+                                <label for="showMenuDrop{{ forloop.index }}" class="head-menu__mobile-item">{{ link.title | upcase }}</label>
+                                <ul class="head-menu__drop head-menu__shadown">
+                                    {%- for childlink in link.links -%}
+                                        <li><a href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
+                                    {%- endfor -%}
+                                </ul>
+                            </li>
+                        {% when "mega_menu" %}
+                            <li >
+                                <a href="{{ link.url }}" class="head-menu__desktop-item">{{ link.title | upcase }}</a>
+                                <input type="checkbox" id="showMenuMega{{ forloop.index }}" class="showMenuMega"/>
+                                <label for="showMenuMega{{ forloop.index }}" class="head-menu__mobile-item">{{ link.title | upcase }}</label>
+                                <div class="head-menu__mega-box head-menu__shadown">
+                                    {%- comment -%} mage image lever 1 {%- endcomment -%}
+                                    {% for block in section.blocks %}
+                                        {% if block.type == "mega_img" %}
+                                            {% assign blockTitle = block.settings.title_menu | downcase %}
+                                            {% if blockTitle == linkTitle %}
+                                                {% if block.settings.img_lv_one %}
+                                                    <div style=" width:100%; position:relative">
+                                                        <img style="width:100%" src="{{ block.settings.select_img | img_url: 'large'}}" alt="" width="auto" height="auto" loading="lazy">
+                                                        {% if block.settings.show_content %}
+                                                            <div class="head__img-wrap-content custom_center" style="font-size: 13px;">
+                                                                <h4 class="head-menu__mega-title-top head-menu__text-img">{{ block.settings.img_heading }}</h4>
+                                                                <h3 class="head-menu__mega-title head-menu__text-img">{{ block.settings.img_title }}</h3>
+                                                                {% if block.settings.img_button != blank %}
+                                                                    <button>{{block.settings.img_button}}</button>
+                                                                {% endif %}
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <div class="head-menu__mega-content">
+                                        {%- comment -%} mega list {%- endcomment -%}
+                                        {%- for childlink in link.links -%}
+                                            <div class="head-menu__row">
+                                                {% assign hiddenTitle = childlink.title | split: ">" | first %}
+                                                {% if hiddenTitle != "hidden" %}
+                                                    <header>{{ childlink.title | escape }}</header>
+                                                {% endif %}
+                                                <ul class="head-menu__mega-links">
+                                                    {%- for grandchildlink in childlink.links -%}
+                                                        <li><a href="{{ grandchildlink.url }}">{{ grandchildlink.title | capitalize }}</a></li>
+                                                    {%- endfor -%}
+                                                    </ul>
+                                            </div> 
+                                        {%- endfor -%}
+                                       
+                                        {% for block in section.blocks %}
+                                            {% assign blockTitle = block.settings.title_menu | downcase %}
+                                             {%- comment -%} mega image {%- endcomment -%}
+                                            {% if block.type == "mega_img" %}
+                                                {% if blockTitle == linkTitle %}
+                                                    {% unless block.settings.img_lv_one %}
+                                                        <div class="head-menu__row">
+                                                            <div class="head-menu__mega-img" style="position:relative">
+                                                                <img style="widht:100%" src="{{block.settings.select_img | img_url: 'large'}}" alt="" width="auto" height="auto" loading="lazy">
+                                                                {% if block.settings.show_content %}
+                                                                    <div class="head__img-wrap-content custom_center" style="font-size: 13px;">
+                                                                        <h4 class="head-menu__mega-title-top head-menu__text-img">{{ block.settings.img_heading }}</h4>
+                                                                        <h3 class="head-menu__mega-title head-menu__text-img">{{ block.settings.img_title }}</h3>
+                                                                        <button>{{block.settings.img_button}}</button>
+                                                                    </div>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    {% endunless %}
+                                                {% endif %}
+                                            {% else %}
+                                                {%- comment -%} mega colection {%- endcomment -%}
+                                                {% if blockTitle == linkTitle %}
+                                                    <div class="head-menu__row">
+                                                        <div>
+                                                             <img src="{{ block.settings.colection.image | img_url:'large'}}" width="auto" height="auto" loading="lazy"/> 
+                                                        </div>
+                                                        <ul class="head-menu__mega-links"  style="margin-top: 10px;">
+                                                            {% for item in block.settings.colection.products limit: 7 %}
+                                                                <li>
+                                                                    <a href="{{item.url}}">{{item.title}}</a>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                   
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </li>
+                        {% endcase %}
+                {% endfor %}
+            </ul>
+            <div class="head-icon" style="display: flex;">
+                <div class="head_item-icon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" class="iconify iconify--material-symbols"><path fill="currentColor" d="m19.6 21l-6.3-6.3q-.75.6-1.725.95Q10.6 16 9.5 16q-2.725 0-4.612-1.887Q3 12.225 3 9.5q0-2.725 1.888-4.613Q6.775 3 9.5 3t4.613 1.887Q16 6.775 16 9.5q0 1.1-.35 2.075q-.35.975-.95 1.725l6.3 6.3ZM9.5 14q1.875 0 3.188-1.312Q14 11.375 14 9.5q0-1.875-1.312-3.188Q11.375 5 9.5 5Q7.625 5 6.312 6.312Q5 7.625 5 9.5q0 1.875 1.312 3.188Q7.625 14 9.5 14Z"></path></svg></div>
+                <div class="head_item-icon">
+                    <a href="{{ routes.cart_url }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 256" class="iconify iconify--ph"><path fill="currentColor" d="M216 64h-40.7a48 48 0 0 0-94.6 0H40a16 16 0 0 0-16 16v128a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16Zm-88-24a32.1 32.1 0 0 1 31 24H97a32.1 32.1 0 0 1 31-24Zm88 168H40V80h40v24a8 8 0 0 0 16 0V80h64v24a8 8 0 0 0 16 0V80h40Z"></path></svg>
+                    </a>
+                    
+                </div>
+                <div class="head_item-icon" >
+                    <label for="menu-btn" style="font-size:20px; "><i class="fa-solid fa-bars"></i> </label>
+                </div>
+            </div>
+        </div>
+       
+   </div>
+</nav>
+    
+<script>
+    var nav = document.getElementById("head-wrap")
+    document.addEventListener("scroll",() => {
+        if (window.scrollY > 45) { 
+            nav.classList.add('nav-top') 
+        } else {
+            nav.classList.remove('nav-top') 
+        }
+    })
+</script>
+
+{% schema %}
+{
+    "name":"Menu",
+    "settings":[
+        {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "t:sections.header.settings.logo.label"
+        }
+    ],
+    "blocks":[
+        {
+            "name":"Mega menu",
+            "type":"mega_menu",
+            "settings":[
+                {
+                    "type":"text",
+                    "id":"title_mega_menu",
+                    "label":"Title menu"
+                }
+            ]
+        },
+        {
+            "name":"Mega Img",
+            "type":"mega_img",
+            "settings":[
+                {
+                    "type":"text",
+                    "id":"title_menu",
+                    "label":"Title menu"
+                },
+                {
+                    "type":"image_picker",
+                    "id":"select_img",
+                    "label":"Image"
+                },
+                {
+                    "type":"checkbox",
+                    "id":"img_lv_one",
+                    "label":"Image lever 1",
+                    "default":false
+                },
+                {
+                    "type":"checkbox",
+                    "id":"show_content",
+                    "label":"Show content",
+                    "default":false
+                },
+                {
+                    "type":"text",
+                    "id":"img_heading",
+                    "label":"Heading",
+                    "default":"this is heading"
+                },
+                {
+                    "type":"text",
+                    "id":"img_title",
+                    "label":"Title",
+                    "default":"this is title"
+                },
+                {
+                    "type":"text",
+                    "id":"img_button",
+                    "label":"Button",
+                    "default":"Click me"
+                },
+                {
+                    "type":"url",
+                    "id":"img_button_url",
+                    "label":"Button url"
+                }
+            ]
+        },
+        {
+            "name":"Collection",
+            "type":"mega_collection",
+            "settings":[
+                {
+                    "type":"text",
+                    "id":"title_menu",
+                    "label":"Title menu"
+                },
+                {
+                    "type":"collection",
+                    "id":"colection",
+                    "label":"Collection menu"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}
