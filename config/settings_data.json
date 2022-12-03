@@ -214,6 +214,12 @@
         "settings": {
           "color_scheme": "background-1"
         }
+      },
+      "announcement": {
+        "type": "announcement",
+        "settings": {
+          "text": "Hello kitty"
+        }
       }
     },
     "content_for_index": [
