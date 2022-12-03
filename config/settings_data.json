@@ -218,7 +218,24 @@
       "announcement": {
         "type": "announcement",
         "settings": {
-          "text": "Hello kitty"
+          "text": "This is a demo store. Content courtesy of SEH Kelly!"
+        }
+      },
+      "custom-head": {
+        "type": "custom-head",
+        "blocks": {
+          "bca3d84b-98a4-4702-9d3e-0638173b31f0": {
+            "type": "mega_menu",
+            "settings": {
+              "title_mega_menu": "Catalog"
+            }
+          }
+        },
+        "block_order": [
+          "bca3d84b-98a4-4702-9d3e-0638173b31f0"
+        ],
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/logo-windsor_800x182_de414ba6-1081-496f-856d-2bc89069baa1.webp"
         }
       }
     },
