@@ -50,11 +50,12 @@ nav .head-container {
 .head-logo {
     display: flex;
     align-items: center;
-}
-.head-logo a {
     font-size: 30px;
     font-weight: 800;
     text-transform: uppercase;  
+}
+.head-logo a {
+   
 }
 .head-menu-container .head-menu {
     display: inline-flex;
