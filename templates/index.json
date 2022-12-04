@@ -190,6 +190,12 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "df99977e-a947-4686-8136-f393c70a3887": {
+      "type": "section-product",
+      "settings": {
+        "collection": "frontpage"
+      }
     }
   },
   "order": [
@@ -199,6 +205,7 @@
     "featured_collection",
     "collage",
     "video",
-    "multicolumn"
+    "multicolumn",
+    "df99977e-a947-4686-8136-f393c70a3887"
   ]
 }
