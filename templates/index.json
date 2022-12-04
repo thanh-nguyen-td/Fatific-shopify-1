@@ -8,8 +8,25 @@
     },
     "119a558f-e8d3-4f56-b842-578858766985": {
       "type": "section-collection",
+      "blocks": {
+        "f886da88-bbb9-43d5-8158-b101b96ca0e9": {
+          "type": "collection",
+          "settings": {
+            "collection": "car"
+          }
+        },
+        "8eb077cc-d750-40f0-ae51-1b8ef5fb0bc0": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "f886da88-bbb9-43d5-8158-b101b96ca0e9",
+        "8eb077cc-d750-40f0-ae51-1b8ef5fb0bc0"
+      ],
       "settings": {
-        "collection": ""
       }
     },
     "rich_text": {
