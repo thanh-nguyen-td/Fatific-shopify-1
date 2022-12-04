@@ -4,17 +4,32 @@
 
 {% schema %}
     {
-        "name":"Collections",
-        "settings":[
+        "name":"Section collections",
+        "blocks":[
             {
                 "type":"collection",
-                "id":"collection",
-                "label":"Collection"
+                "name":"Collections",
+                "limit":2,
+                "settings":[
+                    {
+                        "type":"collection",
+                        "id":"collection",
+                        "label":"Collection"
+                    }
+                ]
             }
         ],
         "presets":[
             {
-                "name":"Collection"
+                "name":"Section collection",
+                "blocks": [
+                {
+                "type": "collection"
+                },
+                {
+                "type": "collection"
+                }
+            ]
             }
         ]
     }
